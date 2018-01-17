@@ -1,0 +1,46 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
+  margin: 0;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+a {
+  color: #00B7FF;
+}
+
+.movie_title {
+  padding-left: 10px;
+  color:gray;
+  text-decoration: none;
+}
+
+.footer {
+  position: relative;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /*background-image: url("./../images/whitebg.png");*/
+  padding: 1rem;
+  text-align: center;
+}
+
+.label-status {
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.label-active {
+  background-color:#5bc0de;
+}
+
+.label-delete {
+  background-color:#d9534f;
+}

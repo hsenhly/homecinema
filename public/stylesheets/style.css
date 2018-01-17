@@ -1,0 +1,80 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
+  margin: 0;
+  background-image: url("./../images/background-img.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.checked {
+    color: orange;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+a {
+  color: #00B7FF;
+}
+.slide-item {
+  width:100%;
+}
+
+.movie-item {
+  width:100%;
+}
+
+.movie_title {
+  padding-left: 10px;
+  color:gray;
+  text-decoration: none;
+}
+
+.image_preview {
+  padding:.10rem;
+  max-width:100%;
+  height:auto;
+}
+
+.video_preview {
+  margin: .10rem;
+  padding:.10rem;
+  transition:all .2s ease-in-out;
+  max-width:100%;
+  min-width: 100%;
+  min-height: 50%
+
+}
+
+.preview{
+  padding:.25rem;
+  background-color:#222;
+  border-radius:.10rem;
+  transition:all .2s ease-in-out;
+}
+
+.detail-movie{
+  padding:.25rem;
+  background-color:#222;
+  opacity: 0.9;
+  border-radius:.10rem;
+  transition:all .2s ease-in-out;
+}
+
+
+.footer {
+  position: relative;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /*background-image: url("./../images/whitebg.png");*/
+  padding: 1rem;
+  text-align: center;
+}

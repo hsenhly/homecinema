@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/admin.css' />
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css"/>
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/bootstrap.bundle.min.js"></script>
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Nice to meet you</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/manager">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+      <h1 class="text-gray my-4 text-center text-lg-left">Add new category</h1>
+      <form action="/manager/save_new_category" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="cat_name">category name:</label>
+          <input type="text" name="cat_name" class="form-control" id="cat_name">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="footer py-2 rounded">
+      <hr class="text-white"></hr>
+      <div class="container">
+        <p class="m-0 text-center text-gray">Copyright &copy; Personal Cinema 2017</p>
+      </div>
+    </footer>
+  </body>
+</html>

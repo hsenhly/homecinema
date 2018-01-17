@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/admin.css' />
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css"/>
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/bootstrap.bundle.min.js"></script>
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Nice to meet you</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/manager">Admin Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+      <h1 class="text-white my-4 text-center text-lg-left">Welcome to admin panel</h1>
+
+      <div class="row text-center text-lg-left">
+        <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="bg-light rounded">
+            <a href="/manager/list_slideshow" class="d-block mb-4 h-150">
+              <img class="img-thumbnail" width="450" height="450" src="/images/slideshow.png" alt="">
+              <p class="movie_title text-center">Slide show</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="bg-light rounded">
+            <a href="/manager/movielist" class="d-block mb-4 h-150">
+              <img class="img-thumbnail" width="450" height="450" src="/images/movie_folder.png" alt="">
+              <p class="movie_title text-center">List Movie</p>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="bg-light rounded">
+            <a href="/manager/category" class="d-block mb-4 h-150">
+              <img class="img-thumbnail" width="450" height="450" src="/images/category.png" alt="">
+              <p class="movie_title text-center">Movie Category</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="footer py-5 rounded">
+      <hr class="text-white"></hr>
+      <div class="container">
+        <p class="m-0 text-center text-gray">Copyright &copy; Personal Cinema 2017</p>
+      </div>
+    </footer>
+  </body>
+</html>
