@@ -2,10 +2,9 @@
 var knex = require('knex')({
     client: 'mysql',
     connection: {
-        host : "localhost",
-        port : 3306,
-        user : "cinema",
-        password : "admin@HomeCinema",
+        host : "mysql://mysql:3306",
+        user : "user616",
+        password : "mGHYtpLjGCHuotlB",
         database : "cinema"
     },
     pool:{min: 2, max: 8}
