@@ -2,8 +2,6 @@ var express = require('express');
 var model = require('../model/index');
 var formData = require("formidable");
 var fs = require('fs');
-var mmm = require('mmmagic'), Magic = mmm.Magic;
-var magic = new Magic(mmm.MAGIC_MIME_TYPE);
 var path = require('path');
 
 module.exports.pageNotfound = function(req, res, next){
