@@ -1,4 +1,3 @@
-var express = require('express');
 var model = require('../model/index');
 var formData = require("formidable");
 var fs = require('fs');
