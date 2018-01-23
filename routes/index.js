@@ -9,8 +9,9 @@ router.get('/javascripts',home.pageNotfound);
 router.get('/stylesheets',home.pageNotfound);
 
 /* GET home page. */
+router.post('/search', home.searchHome);
 router.get('/', home.homePage);
-router.get('/page/:id', home.homePage);
+router.get('/:category/page/:id', home.homePage);
 router.get('/watch/:id', home.moviePreview);
 router.get('/about', home.aboutUs);
 router.get('/contact', home.contactUs);

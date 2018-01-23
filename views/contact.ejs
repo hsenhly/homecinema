@@ -7,9 +7,27 @@
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css"/>
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/javascripts/bootstrap.bundle.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByPNT7S55yiyDfnxYeeCAzy7dItyyXZ9s&callback=myMap"></script>
+    <script>
+      function myMap() {
+        var mapOptions = {
+            center: new google.maps.LatLng(11.570771, 104.888529),
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        }
+
+        // var marker = new google.maps.Marker({
+        //   position: {104.888529, 11.570772},
+        //   map: mapOptions,
+        //   title: 'Here'
+        // });
+
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      }
+    </script>
 
   </head>
-  <body>
+  <body onload="myMap()">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
         <a class="navbar-brand" href="/">Personal Cinema</a>
@@ -37,7 +55,15 @@
     <!-- Page Content -->
     <div class="container">
       <h1 class="text-white my-4 text-center text-lg-left">Contact Us</h1>
-
+      <p class="text-white">
+          Address: # 888, St. 2004 , Sangkat Teuk Thla, Khan Sen Sok, Phnom Penh Cambodia</br>
+          Contact Number: +855 NN NNN NNN</br>
+          Email: email@domain.com</br>
+          Facebook's Page: Personal Cinema</br>
+          Open hour: 8:00AM - 9:00PM</br>
+    </p>
+    </br>
+    <div id="map" style="width:100%; height:500px;">
     </div>
     <!-- /.container -->
     <hr class="text-white"></hr>
@@ -48,4 +74,5 @@
       </div>
     </footer>
   </body>
+
 </html>

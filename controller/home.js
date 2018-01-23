@@ -2,6 +2,8 @@ var model = require('../model/index');
 var formData = require("formidable");
 var fs = require('fs');
 var path = require('path');
+var mmm = require('mmmagic'), Magic = mmm.Magic;
+var magic = new Magic(mmm.MAGIC_MIME_TYPE);
 
 module.exports.pageNotfound = function(req, res, next){
   res.writeHead(302,{
@@ -10,9 +12,27 @@ module.exports.pageNotfound = function(req, res, next){
   res.end();
 }
 
+module.exports.searchHome = function(req, res, next){
+  var page = parseInt(req.params.id) || 1;
+  var category = parseInt(req.params.category) || 0;
+  var form = new formData.IncomingForm();
+  form.parse(req, function(err, fields) {
+    console.log(fields);
+    var key = fields.search;
+    model.movieModel.get_home_movie({selectPage:page, catId:category,q:key},function(err, data){
+      var returnData= {
+        title : 'Home Cinema',
+        listMovie : data
+      }
+      res.render('home', returnData);
+    });
+  });
+}
+
 module.exports.homePage = function(req, res, next){
   var page = parseInt(req.params.id) || 1;
-  model.movieModel.get_top_movie({selectPage:page},function(err, data){
+  var category = parseInt(req.params.category) || 0;
+  model.movieModel.get_home_movie({selectPage:page, catId:category},function(err, data){
     var returnData= {
       title : 'Home Cinema',
       listMovie : data
@@ -278,7 +298,7 @@ module.exports.saveNewSlideshow = function(req, res, next){
       }
       if (file && file.slideshow) {
         fs.rename(file.slideshow.path, path.join(form.uploadDir, file.slideshow.name));
-        magic.detectFile(path.join(form.uploadDir, file.cover.name), function(err, result) {
+        magic.detectFile(path.join(form.uploadDir, file.slideshow.name), function(err, result) {
           if (!err && result.indexOf('image') > -1) {
             if(file && file.slideshow) fields.fileName = file.slideshow.name;
             model.movieModel.add_slide_image(fields,function(err, data){

@@ -44,19 +44,32 @@ method.get_movie_by_category = function(params, callback){
   });
 }
 
-method.get_top_movie = function(params, callback) {
+method.get_home_movie = function(params, callback) {
   var itemPerPage = 10;
   var returnData = {};
   returnData.totalPage = returnData.totalPage || 1;
   params.selectPage = params.selectPage || 1;
+  var queryParam = {
+    is_deleted:2
+  }
+
+  if(params.catId > 0){
+    queryParam.category = params.catId
+  }
+
   knex(knex.tableMovie).count('id as allmovie').where({is_deleted:2})
   .then(function(counter){
     returnData.totalPage = parseInt(counter[0].allmovie / itemPerPage);
   }).then(function(){
-    knex(knex.tableMovie).where({is_deleted:2})
-    .limit(itemPerPage)
-    .offset(itemPerPage*(params.selectPage-1))
-    .orderBy('visit_count', 'desc').then(function(row){
+    var queryKnex = knex(knex.tableMovie).where(queryParam);
+    console.log(params);
+    if(params.q && params.q.length > 0){
+      queryKnex.where('title','like','%'+params.q+'%');
+    }
+    queryKnex.limit(itemPerPage);
+    queryKnex.offset(itemPerPage*(params.selectPage-1));
+    queryKnex.orderBy('visit_count', 'desc');
+    queryKnex.then(function(row){
       if(row){
         returnData.currentPage = params.selectPage;
         returnData.movie = row;
