@@ -62,6 +62,7 @@ method.get_home_movie = function(params, callback) {
     returnData.totalPage = parseInt(counter[0].allmovie / itemPerPage);
   }).then(function(){
     var queryKnex = knex(knex.tableMovie).where(queryParam);
+
     if(params.q && params.q.length > 0){
       queryKnex.where('title','like','%'+params.q+'%');
     }

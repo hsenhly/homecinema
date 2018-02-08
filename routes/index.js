@@ -17,6 +17,8 @@ router.get('/about', home.aboutUs);
 router.get('/contact', home.contactUs);
 
 router.get('/manager', home.adminHome);
+router.get('/login', home.login);
+router.post('/login', home.checkUser);
 router.get('/manager/setting', home.setting);
 router.get('/manager/movielist', home.movieList);
 router.get('/manager/new_movie', home.addNewMovie);

@@ -63,7 +63,7 @@ module.exports.moviePreview = function(req, res, next){
 }
 
 module.exports.adminHome = function(req, res, next){
-  res.render('manager', { title: 'Movie Title', data:['hello world','hello everyone']});
+  res.render('manager', { title: 'Admin', data:[]});
 }
 
 module.exports.addNewMovie = function(req, res, next){
@@ -121,7 +121,7 @@ module.exports.saveNewMovie = function(req, res, next){
 }
 
 module.exports.setting = function(req, res, next){
-  res.render('setting', { title: 'Movie Title', data:['hello world','hello everyone']});
+  res.render('setting', { title: 'Admin', data:[]});
 }
 
 module.exports.movieList = function(req, res, next){
@@ -174,15 +174,15 @@ module.exports.saveEdit = function(req, res, next){
 }
 
 module.exports.deleteMovie = function(req, res, next){
-  res.render('movie_list', { title: 'Movie Title', data:['hello world','hello everyone']});
+  res.render('movie_list', { title: 'remove movie', data:['hello world','hello everyone']});
 }
 
 module.exports.aboutUs = function(req, res, next){
-  res.render('about', { title: 'Movie Title', data:['hello world','hello everyone']});
+  res.render('about', { title: 'About Us', data:['hello world','hello everyone']});
 }
 
 module.exports.contactUs = function(req, res, next){
-  res.render('contact', { title: 'Movie Title', data:['hello world','hello everyone']});
+  res.render('contact', { title: 'Contact Us', data:['hello world','hello everyone']});
 }
 
 module.exports.listCategory = function(req, res, next){
@@ -316,4 +316,12 @@ module.exports.saveNewSlideshow = function(req, res, next){
         });
     }
   });
+}
+
+module.exports.login = function(req, res, next){
+  res.render('login', { title: 'login', data:[]});
+}
+
+module.exports.checkUser = function(req, res, next){
+  res.render('manager', { title: 'Admin', data:[]});
 }
