@@ -46,19 +46,27 @@ method.get_movie_by_category = function(params, callback){
 
 method.get_home_movie = function(params, callback) {
   var itemPerPage = 10;
-  var returnData = {};
+  var returnData = {
+    menu : 'Popular movie',
+    catId : 0
+  };
   returnData.totalPage = returnData.totalPage || 1;
   params.selectPage = params.selectPage || 1;
   var queryParam = {
     is_deleted:2
   }
+  knex(knex.tableCategory).select('id','category_name as name').where({is_deleted:2}).then(function(rows){
+    returnData.category = rows;
+  });
 
-  if(params.catId > 0){
-    queryParam.category = params.catId
+  var queryTotal = knex(knex.tableMovie).count('id as allmovie').where({is_deleted:2});
+  if(params.q && params.q.length > 0){
+    queryTotal.where('title','like','%'+params.q+'%');
   }
-
-  knex(knex.tableMovie).count('id as allmovie').where({is_deleted:2})
-  .then(function(counter){
+  if(params.catId > 0){
+    queryTotal.where('category', params.catId);
+  }
+  queryTotal.then(function(counter){
     returnData.totalPage = parseInt(counter[0].allmovie / itemPerPage);
   }).then(function(){
     var queryKnex = knex(knex.tableMovie).where(queryParam);
@@ -66,9 +74,21 @@ method.get_home_movie = function(params, callback) {
     if(params.q && params.q.length > 0){
       queryKnex.where('title','like','%'+params.q+'%');
     }
+
+    if(params.catId > 0){
+        returnData.catId = params.catId;
+        queryKnex.where('category', params.catId);
+    }else if(params.catId == -2){
+      queryKnex.orderBy('id', 'desc');
+      returnData.menu = 'Latest movie';
+      returnData.catId = -2;
+    }else{
+        queryKnex.orderBy('visit_count', 'desc');
+        returnData.catId = -1;
+    }
     queryKnex.limit(itemPerPage);
     queryKnex.offset(itemPerPage*(params.selectPage-1));
-    queryKnex.orderBy('visit_count', 'desc');
+
     queryKnex.then(function(row){
       if(row){
         returnData.currentPage = params.selectPage;

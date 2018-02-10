@@ -20,8 +20,8 @@ body {
   }
 }
 
-a {
-  color: #00B7FF;
+a:hover {
+    color: yellow;
 }
 .slide-item {
   width:100%;
@@ -60,7 +60,6 @@ a {
   max-width:100%;
   min-width: 100%;
   min-height: 50%
-
 }
 
 .preview{
@@ -79,9 +78,11 @@ a {
 }
 
 .menu-item {
-  background-color: gray;
-  opacity: 1;
+  background-color: rgba(100, 100, 100, 0.8);
   color: white;
+  padding: 10px;
+  margin-left: -1px;
+  margin-right: -1px;
 }
 
 .footer {

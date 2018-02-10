@@ -17,7 +17,6 @@ module.exports.searchHome = function(req, res, next){
   var category = parseInt(req.params.category) || 0;
   var form = new formData.IncomingForm();
   form.parse(req, function(err, fields) {
-    console.log(fields);
     var key = fields.search;
     model.movieModel.get_home_movie({selectPage:page, catId:category,q:key},function(err, data){
       var returnData= {

@@ -87,10 +87,14 @@
         </a>
       </div>
       <br/>
-      <h1 class="text-white my-4 text-center text-lg-left">Top Movie</h1>
-      <div class="btn-group btn-group-justified">
-        <a href="/" class="btn menu-item">Popular</a>
-        <a href="/" class="btn menu-item">Latest</a>
+      <h1 class="text-white my-4 text-center text-lg-left">
+        <%= listMovie.menu; %></h1>
+      <div>
+        <a href="/-1/page/1" class="btn menu-item">Popular</a>
+        <a href="/-2/page/1" class="btn menu-item">Latest</a>
+        <% for(var l=0; l<listMovie.category.length; l++) {%>
+            <a href="/<%= listMovie.category[l].id %>/page/1" class="btn menu-item"><%= listMovie.category[l].name %></a>
+        <% } %>
       </div>
       <div class="row text-center">
         <% for(var i=0; i<listMovie.movie.length; i++) {%>
@@ -112,23 +116,23 @@
             </li>
           <%  }else { %>
             <li class="page-item">
-              <a class="page-link" href="/0/page/<%= listMovie.currentPage-1 %>" tabindex="-1">Previous</a>
+              <a class="page-link" href="/<%= listMovie.catId %>/page/<%= listMovie.currentPage-1 %>" tabindex="-1">Previous</a>
             </li>
           <% } %>
             <% for(var k=1; k<= listMovie.totalPage; k++) {%>
               <% if(k == listMovie.currentPage) { %>
                 <li class="page-item active">
-                  <a class="page-link" href="/0/page/<%= k %>"><%= k %></a>
+                  <a class="page-link" href="/<%= listMovie.catId %>/page/<%= k %>"><%= k %></a>
                 </li>
               <%  }else { %>
                 <li class="page-item">
-                  <a class="page-link" href="/0/page/<%= k %>"><%= k %></a>
+                  <a class="page-link" href="/<%= listMovie.catId %>/page/<%= k %>"><%= k %></a>
                 </li>
               <% } %>
             <% }%>
             <% if(listMovie.totalPage > listMovie.currentPage) { %>
               <li class="page-item">
-                <a class="page-link" href="/0/page/<%= listMovie.currentPage+1 %>">Next</a>
+                <a class="page-link" href="/<%= listMovie.catId %>/page/<%= listMovie.currentPage+1 %>">Next</a>
               </li>
             <%  }else { %>
               <li class="page-item disabled">
