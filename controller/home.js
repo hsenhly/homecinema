@@ -318,9 +318,35 @@ module.exports.saveNewSlideshow = function(req, res, next){
 }
 
 module.exports.login = function(req, res, next){
-  res.render('login', { title: 'login', data:[]});
+  res.render('login', { title: 'login', msg:""});
+}
+
+module.exports.logout = function(req, res, next){
+  req.session.destroy(function(){
+      console.log("user logged out.")
+  });
+  res.writeHead(302, {
+    'Location': "/login"
+  });
+  res.end();
 }
 
 module.exports.checkUser = function(req, res, next){
-  res.render('manager', { title: 'Admin', data:[]});
+  var form = new formData.IncomingForm();
+  form.multiples = true;
+
+  form.parse(req, function(err, fields, file) {
+    model.movieModel.checkUser(fields, function(err, data){
+      if(err){
+        res.render('login', { title: 'login', msg:"wrong email or password"});
+      }else{
+        req.session.user = data.token;
+        res.writeHead(302, {
+          'Location': "/manager"
+        });
+      }
+      res.end();
+    });
+  });
+
 }

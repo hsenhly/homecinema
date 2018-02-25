@@ -330,4 +330,15 @@ method.recoverSlideshow = function(params,callback){
     callback(null,[]);
   });
 }
+
+method.checkUser = function(params,callback){
+  console.log(params);
+  knex(knex.tableManager).first()
+  .where({email: params.email, password:params.passwords})
+  .then(function(data){
+    callback(null, data);
+  }).catch(function(err) {
+    callback(err, null);
+  });
+}
 module.exports = movieModel;
