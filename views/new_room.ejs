@@ -3,7 +3,7 @@
   <head>
 
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/admin.css' />
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css"/>
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/javascripts/bootstrap.bundle.min.js"></script>
@@ -12,25 +12,16 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="/">TheEpisode402</a>
+        <a class="navbar-brand" href="#">Nice to meet you</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/room">Room</a>
-            </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#">About
-              <span class="sr-only">(current)</span>
-            </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/contact">Contact</a>
+              <a class="nav-link" href="/manager">Home
+                <span class="sr-only">(current)</span>
+              </a>
             </li>
           </ul>
         </div>
@@ -39,20 +30,23 @@
 
     <!-- Page Content -->
     <div class="container">
-      <h1 class="text-white my-4 text-center text-lg-left">About Us</h1>
-      <p class="about">
-        The Episode42 Is private movie theater that provide movie experiences with comfortable seating,</br>
-         fantastic sound and picture quality as well as delicious snacks and drink to everyone especially family .
-      </p>
+      <h1 class="text-gray my-4 text-center text-lg-left">Add new room</h1>
+      <form action="/manager/save_newroom" method="post" enctype="multipart/form-data">
 
-
+        <div class="form-group">
+          <label for="cover">Room Image:</label>
+          <input type="file" name="room_photo" class="form-control" id="cover">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
     </div>
     <!-- /.container -->
-    <hr class="text-white"></hr>
+
     <!-- Footer -->
     <footer class="footer py-2 rounded">
+      <hr class="text-white"></hr>
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; TheEpisode402</p>
+        <p class="m-0 text-center text-gray">Copyright &copy; Personal Cinema 2017</p>
       </div>
     </footer>
   </body>

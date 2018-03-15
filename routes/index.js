@@ -22,6 +22,7 @@ router.get('/:category/page/:id', home.homePage);
 router.get('/watch/:id', home.moviePreview);
 router.get('/about', home.aboutUs);
 router.get('/contact', home.contactUs);
+router.get('/room', home.room);
 
 router.get('/manager', userAuth, home.adminHome);
 router.get('/login', home.login);
@@ -47,5 +48,11 @@ router.get('/manager/new_slideshow',userAuth, home.newSlideShow);
 router.post('/manager/save_newslideshow', userAuth,home.saveNewSlideshow);
 router.get('/manager/delete_slideshow/:id', userAuth,home.deleteSlideshow);
 router.get('/manager/recover_slideshow/:id', userAuth,home.recoverSlideshow);
+
+router.get('/manager/room',userAuth, home.listRoom);
+router.get('/manager/new_room',userAuth, home.newRoom);
+router.post('/manager/save_newroom', userAuth,home.saveRoom);
+router.get('/manager/delete_room/:id', userAuth,home.deleteRoom);
+router.get('/manager/recover_room/:id', userAuth,home.recoverRoom);
 
 module.exports = router;

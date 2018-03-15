@@ -35,6 +35,11 @@ Object.defineProperties(knex,{
         get: function () {
             return 'manager'
         }
+    },
+    tableRoom:{
+      get : function(){
+        return 'room'
+      }
     }
 });
 module.exports = knex;

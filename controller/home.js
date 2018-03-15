@@ -41,6 +41,18 @@ module.exports.homePage = function(req, res, next){
   });
 }
 
+module.exports.room = function(req, res, next){
+
+  model.movieModel.get_list_room({},function(err, data){
+    var returnData= {
+      title : 'Home Cinema',
+      listRoom : data || []
+    }
+    res.render('room', returnData);
+
+  });
+}
+
 module.exports.moviePreview = function(req, res, next){
   var id = parseInt(req.params.id) || 1;
   model.movieModel.get_movie_detail({id:id},function(err, data){
@@ -309,6 +321,73 @@ module.exports.saveNewSlideshow = function(req, res, next){
           } else {
             res.writeHead(302, {
               'Location': "/manager/list_slideshow"
+            });
+            res.end();
+          }
+        });
+    }
+  });
+}
+
+module.exports.listRoom = function(req, res, next){
+
+  model.movieModel.getAllRoom(req.params, function(err, data){
+    var returnData = {
+      title : "List Room",
+      room : data
+    }
+    res.render('list_room', returnData);
+  });
+}
+
+module.exports.deleteRoom = function(req, res, next){
+
+  model.movieModel.deleteRoom(req.params, function(err, data){
+    res.writeHead(302, {
+      'Location': "/manager/room"
+    });
+    res.end();
+  });
+}
+
+module.exports.recoverRoom = function(req, res, next){
+
+  model.movieModel.recoverRoom(req.params, function(err, data){
+    res.writeHead(302, {
+      'Location': "/manager/room"
+    });
+    res.end();
+  });
+}
+
+module.exports.newRoom = function(req, res, next){
+  res.render('new_room', { title: 'Add Room', data:[]});
+}
+
+module.exports.saveRoom = function(req, res, next){
+  var form = new formData.IncomingForm();
+  form.multiples = true;
+  form.parse(req, function(err, fields, file) {
+
+      form.uploadDir = './public/images/';
+
+      if (!fs.existsSync(form.uploadDir)) {
+        fs.mkdirSync(form.uploadDir);
+      }
+      if (file && file.room_photo) {
+        fs.rename(file.room_photo.path, path.join(form.uploadDir, file.room_photo.name));
+        magic.detectFile(path.join(form.uploadDir, file.room_photo.name), function(err, result) {
+          if (!err && result.indexOf('image') > -1) {
+            if(file && file.room_photo) fields.fileName = file.room_photo.name;
+            model.movieModel.add_room_image(fields,function(err, data){
+              res.writeHead(302, {
+                'Location': "/manager/room"
+              });
+              res.end();
+            });
+          } else {
+            res.writeHead(302, {
+              'Location': "/manager/room"
             });
             res.end();
           }

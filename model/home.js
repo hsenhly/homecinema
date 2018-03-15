@@ -4,6 +4,34 @@ function movieModel (){
 }
 var method = movieModel.prototype;
 
+method.get_list_room = function(params, callback) {
+
+  knex(knex.tableRoom).where({is_deleted:2}).then(function(listRoom){
+    if(listRoom){
+      callback(null, listRoom);
+    }else{
+      callback(null, []);
+    }
+  }).catch(function(err) {
+    console.log(err);
+    callback(null,[]);
+  });
+}
+
+method.getAllRoom = function(params, callback) {
+
+  knex(knex.tableRoom).then(function(listRoom){
+    if(listRoom){
+      callback(null, listRoom);
+    }else{
+      callback(null, []);
+    }
+  }).catch(function(err) {
+    console.log(err);
+    callback(null,[]);
+  });
+}
+
 method.get_all_movie = function(params, callback) {
   knex(knex.tableMovie).select('movie.id as movieId','movie.title','movie.rating','movie.visit_count','category.category_name','movie.created_at')
   .innerJoin('category', 'movie.category', 'category.id').where({'movie.is_deleted':2}).then(function(row){
@@ -331,8 +359,44 @@ method.recoverSlideshow = function(params,callback){
   });
 }
 
+method.deleteRoom = function(params,callback){
+  knex(knex.tableRoom)
+  .where({id:params.id}).update({is_deleted:1})
+  .then(function(updated){
+    knex(knex.tableRoom).count('id as counter').where({is_deleted:2}).then(function(row){
+      if(row[0].counter == 0){
+        knex(knex.tableRoom).where({id:params.id}).update({is_deleted:2}).then(function(r){});
+      }
+    });
+    callback(null,{ok:1});
+  }).catch(function(err) {
+    console.log(err);
+    callback(null,[]);
+  });
+}
+
+method.recoverRoom = function(params,callback){
+  knex(knex.tableRoom)
+  .where({id:params.id}).update({is_deleted:2})
+  .then(function(updated){
+    callback(null,{ok:1});
+  }).catch(function(err) {
+    console.log(err);
+    callback(null,[]);
+  });
+}
+
+method.add_room_image = function(params,callback){
+  knex(knex.tableRoom)
+  .insert({image: params.fileName}).then(function(updated){
+    callback(null,{ok:1});
+  }).catch(function(err) {
+    console.log(err);
+    callback(null,[]);
+  });
+}
+
 method.checkUser = function(params,callback){
-  console.log(params);
   knex(knex.tableManager).first()
   .where({email: params.email, password:params.passwords})
   .then(function(data){
