@@ -38,22 +38,27 @@
 
     <!-- Page Content -->
     <div class="container">
-      <div class="detail-movie">
-        <h1 class="text-white text-lg-left"><%= title %></h1>
-        <!-- <p class="text-white my-1 text-center text-lg-left">Duration:<%= movie.duration %></p> -->
-        <p class="text-white my-1 text-center text-lg-left">Cateogry:<%= movie.category %></p>
-        <p class="text-white my-1 text-center text-lg-left">
-          Rating:<% for(var i=1; i<=5; i++){ %>
-                  <% if(i <= movie.rating){ %>
-                      <span class="fa fa-star checked"></span>
-                  <% }else{ %>
-                      <span class="fa fa-star"></span>
-                <% }}  %>
-        </p>
-        <p class="text-white my-4 text-center text-lg-left">Description:<%= movie.description %></p>
+      <div class="row detail-movie">
+        <div class="col">
+            <br/>
+            <h1 class="text-white text-lg-left"><%= title %></h1>
+            <!-- <p class="text-white my-1 text-center text-lg-left">Duration:<%= movie.duration %></p> -->
+            <p class="text-white my-1 text-center text-lg-left">Cateogry:<%= movie.category %></p>
+            <p class="text-white my-1 text-center text-lg-left">
+              Rating:<% for(var i=1; i<=5; i++){ %>
+                      <% if(i <= movie.rating){ %>
+                          <span class="fa fa-star checked"></span>
+                      <% }else{ %>
+                          <span class="fa fa-star"></span>
+                    <% }}  %>
+            </p>
+            <p class="text-white my-4 text-center text-lg-left">Description:<%= movie.description %></p>
+        </div>
+        <div class="col">
+          <img class="image_preview" src="/images/<%= movie.cover_image %>" alt="">
+        </div>
       </div>
-      <div class="preview">
-        <img class="image_preview" src="/images/<%= movie.cover_image %>" alt="">
+      <div class="row preview">
         <iframe  class="video_preview" height="600" src="https://www.youtube.com/embed/<%= movie.trailer_url %>" allowfullscreen>
         </iframe>
       </div>
