@@ -33,7 +33,7 @@ method.getAllRoom = function(params, callback) {
 }
 
 method.get_all_movie = function(params, callback) {
-  knex(knex.tableMovie).select('movie.id as movieId','movie.title','movie.rating','movie.visit_count','category.category_name','movie.created_at')
+  knex(knex.tableMovie).select('movie.id as movieId','movie.title','movie.duration','movie.rating','movie.visit_count','category.category_name','movie.created_at')
   .innerJoin('category', 'movie.category', 'category.id').where({'movie.is_deleted':2}).then(function(row){
     if(row){
       callback(null,row);
@@ -229,6 +229,21 @@ method.save_movie = function(params,callback){
   });
 }
 
+method.get_deleted_movie = function(params, callback) {
+  knex(knex.tableMovie).select('movie.id as movieId','movie.title','movie.duration','movie.rating','movie.visit_count','category.category_name','movie.created_at')
+  .innerJoin('category', 'movie.category', 'category.id').where({'movie.is_deleted':1}).then(function(row){
+    if(row){
+      callback(null,row);
+    }else{
+      callback(null, []);
+    }
+  }).catch(function(err) {
+    console.log(err);
+    callback(null,[]);
+  });
+}
+
+
 method.deleteMovie = function(params,callback){
   knex(knex.tableMovie).where('id', params.id)
   .update({
@@ -236,6 +251,23 @@ method.deleteMovie = function(params,callback){
   }).then(function(row){
     callback(null,row);
   });
+}
+
+method.recoverMovie = function(params,callback){
+  knex(knex.tableMovie).where('id', params.id)
+  .update({
+    is_deleted: 2
+  }).then(function(row){
+    callback(null,row);
+  });
+}
+
+method.destroyMovie = function(params,callback){
+  knex(knex.tableMovie).where('id', params.id)
+  .del().then(function(row){
+    callback(null,[]);
+  });
+
 }
 
 method.create_category = function(params,callback){

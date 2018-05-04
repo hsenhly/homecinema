@@ -35,6 +35,9 @@ router.get('/manager/edit_movie/:id', userAuth,home.editMovie);
 router.post('/manager/save_new_movie', userAuth,home.saveNewMovie);
 router.post('/manager/save_edit_movie', userAuth,home.saveEdit);
 router.get('/manager/delete_movie/:id', userAuth,home.deleteMovie);
+router.get('/manager/delmovielist',userAuth, home.delMovieList);
+router.get('/manager/recover/:id', userAuth,home.recoverMovie);
+router.get('/manager/destroy/:id', userAuth,home.destroyMovie);
 
 router.get('/manager/category', userAuth,home.listCategory);
 router.get('/manager/add_new_category', userAuth,home.addNewCategory);

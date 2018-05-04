@@ -112,6 +112,34 @@ module.exports.deleteMovie = function(req, res, next){
   });
 }
 
+module.exports.recoverMovie = function(req, res, next){
+  model.movieModel.recoverMovie(req.params, function(err, data){
+    var returnData = {
+      title:"recover movie",
+      movie: []
+    }
+
+    res.writeHead(302, {
+      'Location': "/manager/delmovielist"
+    });
+    res.end();
+  });
+}
+
+module.exports.destroyMovie = function(req, res, next){
+  model.movieModel.destroyMovie(req.params, function(err, data){
+    var returnData = {
+      title:"destroy movie",
+      movie: []
+    }
+
+    res.writeHead(302, {
+      'Location': "/manager/delmovielist"
+    });
+    res.end();
+  });
+}
+
 module.exports.saveNewMovie = function(req, res, next){
 
   var form = new formData.IncomingForm();
@@ -156,6 +184,16 @@ module.exports.movieList = function(req, res, next){
       movies:data
     }
     res.render('movie_list', returnData);
+  });
+}
+
+module.exports.delMovieList = function(req, res, next){
+  model.movieModel.get_deleted_movie({},function(err, data){
+    var returnData = {
+      title:"Deleted movie",
+      movies:data
+    }
+    res.render('del_movie_list', returnData);
   });
 }
 
