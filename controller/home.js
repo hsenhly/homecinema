@@ -5,12 +5,6 @@ var path = require('path');
 var mmm = require('mmmagic'), Magic = mmm.Magic;
 var magic = new Magic(mmm.MAGIC_MIME_TYPE);
 
-function no_yes (){
-  /*
-  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnX3dz51M9oo4USXJtSJCoBZopeHjP6IZLHbVGtxX000L+OZexOIu/DUbZ9n1hhc/n3EAha5bD4Xi16BEzsIj9sij6KbDpYrUdVnY2/BcdATP6r8VwzyIScHxG67ILet8AqnGXVCnCD9g0EYB4fbEpi+c06yuEZTrFWtijk5QDNpGBc7dWGCSnteSl8bGZfPa2OFWrLFSn9gH1yWtQR6CFy//i/Q/mefno3YX9phwZJ5JPnN93Bye1o/7PdX1fRD79THCXp9nXZ8XN2BEMAvQ8uW3J1LqXw1YPCOvuK/41/NcolSUtfHwbGM2wGnj4EzN7rlCNGZVxqtUKMAO+x6+t senhlyheng@Senhlys-MacBook-Pro.local
-  */
-}
-
 module.exports.pageNotfound = function(req, res, next){
   res.writeHead(302,{
     'Location': "/"
@@ -39,7 +33,7 @@ module.exports.homePage = function(req, res, next){
   var category = parseInt(req.params.category) || 0;
   model.movieModel.get_home_movie({selectPage:page, catId:category},function(err, data){
     var returnData= {
-      title : 'Home Cinema',
+      title : 'TheEpisode402',
       listMovie : data
     }
     res.render('home', returnData);
@@ -51,7 +45,7 @@ module.exports.room = function(req, res, next){
 
   model.movieModel.get_list_room({},function(err, data){
     var returnData= {
-      title : 'Home Cinema',
+      title : 'Room',
       listRoom : data || []
     }
     res.render('room', returnData);
@@ -101,6 +95,20 @@ module.exports.editMovie = function(req, res, next){
     }
 
     res.render('edit_movie', returnData);
+  });
+}
+
+module.exports.deleteMovie = function(req, res, next){
+  model.movieModel.deleteMovie(req.params, function(err, data){
+    var returnData = {
+      title:"delete movie",
+      movie: data
+    }
+
+    res.writeHead(302, {
+      'Location': "/manager/movielist"
+    });
+    res.end();
   });
 }
 
@@ -188,10 +196,6 @@ module.exports.saveEdit = function(req, res, next){
         });
       }
     });
-}
-
-module.exports.deleteMovie = function(req, res, next){
-  res.render('movie_list', { title: 'remove movie', data:['hello world','hello everyone']});
 }
 
 module.exports.aboutUs = function(req, res, next){

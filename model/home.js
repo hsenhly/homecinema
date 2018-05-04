@@ -106,13 +106,16 @@ method.get_home_movie = function(params, callback) {
     if(params.catId > 0){
         returnData.catId = params.catId;
         queryKnex.where('category', params.catId);
-    }else if(params.catId == -2){
+        queryKnex.orderBy('id', 'desc');
+    }else if(params.catId == -1){
+      queryKnex.orderBy('visit_count', 'desc');
+      returnData.menu = 'Popular movie';
+      returnData.catId = -1;
+    } else {
       queryKnex.orderBy('id', 'desc');
       returnData.menu = 'Latest movie';
       returnData.catId = -2;
-    }else{
-        queryKnex.orderBy('visit_count', 'desc');
-        returnData.catId = -1;
+
     }
     queryKnex.limit(itemPerPage);
     queryKnex.offset(itemPerPage*(params.selectPage-1));
@@ -152,7 +155,6 @@ method.get_movie_detail = function(params, callback) {
     if(row){
       knex(knex.tableCategory).first('category_name').where({'id':row.category}).then(function(category){
         row.category = category.category_name;
-        row.duration = '1h:38mn';
         callback(null, row);
         knex(knex.tableMovie).update('visit_count',row.visit_count+1).where({'id':row.id,is_deleted:2}).then(function(s){});
       });
@@ -189,9 +191,9 @@ method.save_new_movie = function(params, callback){
      cover_image: params.fileName,
      trailer_url: params.trailer,
      category: params.category,
+     duration : params.duration,
      description:params.description
    }).then(function(row){
-     console.log(row);
     if(row){
       callback(null,row);
     }else{
@@ -208,6 +210,7 @@ method.save_movie = function(params,callback){
     title: params.title,
     trailer_url: params.trailer,
     category: params.category,
+    duration : params.duration,
     description:params.description
   }
   if(params.fileName){
@@ -226,8 +229,13 @@ method.save_movie = function(params,callback){
   });
 }
 
-method.delete_movie = function(params,callback){
-
+method.deleteMovie = function(params,callback){
+  knex(knex.tableMovie).where('id', params.id)
+  .update({
+    is_deleted: 1
+  }).then(function(row){
+    callback(null,row);
+  });
 }
 
 method.create_category = function(params,callback){

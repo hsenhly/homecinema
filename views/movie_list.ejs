@@ -42,8 +42,9 @@
         <tr>
           <th>id</th>
           <th>name</th>
+          <th>duration</th>
           <th>visit count</th>
-          <th>rating</th>
+          <th>ratting</th>
           <th>category</th>
           <th>created at</th>
           <th>action</th>
@@ -54,11 +55,12 @@
           <tr>
             <td><%= movies[i].movieId %></td>
             <td><%=movies[i].title %></td>
+            <td><%=movies[i].duration %></td>
             <td><%= movies[i].visit_count %></td>
             <td><%= movies[i].rating %></td>
             <td><%= movies[i].category_name %></td>
             <td><%= movies[i].created_at %></td>
-            <td><a href="/watch/<%= movies[i].movieId %>">preview</a> | <a href="/manager/edit_movie/<%= movies[i].movieId %>">edit</a> | <a>delete</a></td>
+            <td><a href="/watch/<%= movies[i].movieId %>">preview</a> | <a href="/manager/edit_movie/<%= movies[i].movieId %>">edit</a> | <a href="/manager/delete_movie/<%= movies[i].movieId %>">delete</a></td>
           </tr>
         <% } %>
       </tbody>
