@@ -10,7 +10,11 @@ var session = require('express-session');
 var index = require('./routes/index');
 
 var app = express();
-app.use(session({secret: "1sfadfs@123456789098!@#$%ˆ&*asdlfasdfh"}));
+app.use(session({
+  secret: "1sfadfs@123456789098!@#$%ˆ&*asdlfasdfh",
+  resave: true,
+  saveUninitialized: true
+}));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
