@@ -21,8 +21,38 @@ body {
 }
 
 a:hover {
-    color: yellow;
+  color: blue;
 }
+
+a.menu-item:hover {
+  color: #66ffcc;
+  text-decoration: none;
+  background-color: rgba(20, 20, 20, 0.9);
+}
+
+a.d-block:hover {
+  color: #66ffcc;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(230, 255, 204, 0));
+}
+
+.red-color {
+  color: red;
+  text-decoration-color: red;
+}
+
+.blue-color {
+  text-decoration-color: blue;
+  color: blue;
+}
+
+.menu-item {
+  background-color: rgba(50, 50, 50, 0.8);
+  color: white;
+  padding: 10px;
+  margin-left: -1px;
+  margin-right: -1px;
+}
+
 .slide-item {
   width:100%;
 }
@@ -37,7 +67,8 @@ a:hover {
   background-color:#fff;
   transition:all .2s ease-in-out;
   max-width:100%;
-  height:200px
+  height:230px;
+  border-radius: .1rem;
 }
 
 .room-item {
@@ -50,8 +81,8 @@ a:hover {
 }
 
 .movie_title {
-  padding-left: 20px;
-  color:black;
+  padding-left: 10px;
+  color:white;
   text-decoration: none;
 }
 
@@ -83,12 +114,11 @@ a:hover {
   transition:all .2s ease-in-out;
 }
 
-.menu-item {
-  background-color: rgba(100, 100, 100, 0.8);
+.movie-item-bg{
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1));
   color: white;
-  padding: 10px;
-  margin-left: -1px;
-  margin-right: -1px;
+  padding: 1px;
+  border-radius: .5rem;
 }
 
 .footer {
