@@ -73,7 +73,7 @@ method.get_movie_by_category = function(params, callback){
 }
 
 method.get_home_movie = function(params, callback) {
-  var itemPerPage = 10;
+  var itemPerPage = 20;
   var returnData = {
     menu : 'Popular movie',
     catId : 0
